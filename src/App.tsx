@@ -1,26 +1,28 @@
+import {
+  createBrowserRouter,
+  makeRouteConfig,
+  Route,
+} from 'found';
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import ReactDOM from 'react-dom';
+import './index.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const AppPage: React.FC = () => {
+  return <div>AppPage</div>
 }
 
-export default App;
+const BrowserRouter = createBrowserRouter({
+  routeConfig: makeRouteConfig(
+    <Route path="/" Component={AppPage}>
+      <Route path="dokument/:documentId">
+        
+      </Route>
+    </Route>,
+  ),
+
+  renderError: ({ error }) => (
+    <div>{error.status === 404 ? 'Not found' : 'Error'}</div>
+  ),
+});
+
+ReactDOM.render(<BrowserRouter />, document.getElementById('root'));
